@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/x-icon" href="favicon.svg">
+
+    <title>PIEAS Aggregate Calculator | Calculate Your Admission Chances Instantly</title>
+
+    <meta name="description" content="Calculate your PIEAS aggregate instantly using this free tool. Fast, easy, and accurate.">
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    p {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 25px;
+    text-align: center;
+    line-height: 1.6;
+    padding: 0 10px;
+}
+
+.footer {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.footer a {
+    color: #689f38;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: #33691e;
+    text-decoration: underline;
+}
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+        padding: 20px;
+    }
+
+    .main {
+        width: 100%;
+        max-width: 500px;
+        background-color: #ffffffdd;
+        /* backdrop-filter: blur(6px); */
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 100, 0, 0.2);
+        padding: 40px 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+    .main:hover {
+        transform: scale(1.01);
+    }
+
+    h1 {
+        color: #689f38;
+        margin-bottom: 30px;
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .formbox {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    input {
+        padding: 12px 15px;
+        border: 2px solid #d0e8c1;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.2s ease;
+    }
+
+    input:focus {
+        border-color: #689f38;
+        outline: none;
+    }
+
+    .button {
+        background-color: #689f38;
+        color: white;
+        padding: 14px 30px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .button:hover {
+        transform: scale(1.05);
+        background-color: #558b2f;
+    }
+
+    span {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        color: #333;
+        text-align: center;
+    }
+
+    @media (max-width: 500px) {
+        .main {
+            padding: 30px 20px;
+        }
+
+        input {
+            font-size: 0.95rem;
+        }
+
+        .button {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<body>
+    
+    <div class="main">
+        <h1>PIEAS Aggregate Calculator</h1>
+        <h2 style="color:#444; font-size:1rem; text-align:center; margin-top:-15px; margin-bottom:20px;">
+            Quickly calculate your PIEAS (Pakistan Institute of Engineering and Applied Sciences) entry test aggregate with this free online tool.
+        </h2>
+        <p>
+            Use this fast and accurate <strong>PIEAS (Pakistan Institute of Engineering and Applied Sciences) Aggregate Calculator</strong> to estimate your chances for admission! Just enter your SSC, HSSC, and Entry Test marks to get an instant, no-nonsense result. Built for students who, like me, couldn’t find a decent calculator for one of the biggest universities out there. Tragic, honestly.
+        </p>
+                <form action="">
+            <div class="formbox">
+            <input type="number" id='ssco' placeholder="SSC Marks Obtained" required>
+            <input type="number" id=ssct placeholder="SSC Marks Total" required>
+            </div>
+            <div class="formbox">
+                <input type="number" id='hssco' placeholder="HSSC-1 Marks Obtained" required>
+                <input type="number" id='hssct' placeholder="HSSC-1 Marks Total" required>
+            </div >
+            <div class="formbox">
+                <input type="number" id='ento' placeholder="PIEAS Entry Test Marks Obtained" required>
+                <input type="number" id='entt' placeholder="PIEAS Entry Test Marks Total" required>
+            </div>
+            
+        </form>
+        <button class="button" onclick="Calculate()">Submit</button>
+        <span id='result'> </span>
+        <div class="footer">
+            Made with love by 
+            <a href="https://abdullahcodingboi.github.io/Abdullah-Khalid/" target="_blank">Abdullah Khalid</a>
+        </div>
+        <p style="font-size:0.6rem; color:#666; text-align:center; margin-top:20px;">
+            *“PIEAS” stands for Pakistan Institute of Engineering and Applied Sciences.
+          </p>
+          
+    </div>
+    
+    
+</body>
+<script>
+ function Calculate() {
+    const ssco = parseFloat(document.getElementById("ssco").value);
+    const ssct = parseFloat(document.getElementById("ssct").value);
+    const hssco = parseFloat(document.getElementById("hssco").value);
+    const hssct = parseFloat(document.getElementById("hssct").value);
+    const ento = parseFloat(document.getElementById("ento").value);
+    const entt = parseFloat(document.getElementById("entt").value);
+
+    if (!ssco || !ssct || !hssco || !hssct || !ento || !entt) {
+        alert("Bro... fill in all the fields 🙃");
+        return;
+    }
+
+    const sccPercentage = ssco / ssct * 100;
+    const hssPercentage = hssco / hssct * 100;
+    const entryPercentage = ento / entt * 100;
+
+    const Aggregate = sccPercentage * 0.15 + hssPercentage * 0.25 + entryPercentage * 0.6;
+    let message=''
+    if (Aggregate < 79) {
+    message = "Your Aggregate is: " + Aggregate.toFixed(2) + "% 😬 Bro... you gotta grind harder. Like, seriously. Wake up, choose violence, and STUDY!";
+} else if (Aggregate >= 79 && Aggregate < 80) {
+    message = "Your Aggregate is: " + Aggregate.toFixed(2) + "% 😐 Meh... borderline. You're walking the tightrope, my guy.";
+} else {
+    message = "Your Aggregate is: " + Aggregate.toFixed(2) + "% 🎉 Congrats! You're cooking! Go flex on your cousins now.";
+}
+document.getElementById("result").textContent = message;
+}
+
+</script>
+
+</html>
